@@ -1,33 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-
-function PlayerPreview (props) {
-  return (
-    <div>
-      <div className='column'>
-        <img
-          className='avatar'
-          src={props.avatar}
-          alt={`Avatar for ${props.username}`}
-        />
-        <h2 className='username'>@{props.username}</h2>
-      </div>
-      <button
-        className='reset'
-        onClick={props.onReset.bind(null, props.id)}
-      >
-        Reset
-      </button>
-    </div>
-  )
-}
-PlayerPreview.propTypes = {
-  avatar: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequired
-}
+import { Link } from 'react-router-dom'
+import PlayerPreview from './PlayerPreview.js'
 
 class PlayerInput extends React.Component {
   constructor (props) {
@@ -105,13 +79,14 @@ class Skirmish extends React.Component {
   }
 
   render () {
+    const match = this.props.match
     const playerOneName = this.state.playerOneName
     const playerTwoName = this.state.playerTwoName
     const playerOneImage = this.state.playerOneImage
     const playerTwoImage = this.state.playerTwoImage
     return (
       <div>
-        <h1>This is a comparison of your and your friend's stats (tbc)</h1>
+        <h1>Compare your GitHub bragging rights to your friend's!</h1>
         <div className='row'>
           {!playerOneName &&
             <PlayerInput
@@ -123,10 +98,13 @@ class Skirmish extends React.Component {
           {playerOneImage !== null &&
             <PlayerPreview
               avatar={playerOneImage}
-              username={playerOneName}
-              onReset={this.handleReset}
-              id='playerOne'
-            />
+              username={playerOneName}>
+              <button
+                className='reset'
+                onClick={this.handleReset.bind(null, 'playerOne')}>
+                Reset
+              </button>
+            </PlayerPreview>
           }
           {!playerTwoName &&
             <PlayerInput
@@ -138,12 +116,25 @@ class Skirmish extends React.Component {
           {playerTwoImage !== null &&
             <PlayerPreview
               avatar={playerTwoImage}
-              username={playerTwoName}
-              onReset={this.handleReset}
-              id='playerTwo'
-            />
+              username={playerTwoName}>
+              <button
+                className='reset'
+                onClick={this.handleReset.bind(null, 'playerTwo')}>
+                Reset
+              </button>
+            </PlayerPreview>
           }
         </div>
+        {playerOneImage && playerTwoImage &&
+          <Link
+            className='button'
+            to={{
+              pathname: `${this.props.match.url}/results`,
+              search: `?playerOneName=${playerOneName}&playerTwoName=${playerTwoName}`
+            }}>
+            Battle
+            </Link>
+        }
       </div>
     )
   }
