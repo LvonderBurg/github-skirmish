@@ -8,23 +8,18 @@ function SelectLanguageNav (props) {
     <ul className="languages">
       {languages.map((el) => {
         return (
-          <li
-            key={el}
+          <li key={el}
             className={el === props.selectedLang ? "selected" : null}
-            onClick={props.onSelect.bind(null, el)}>
-            {el}
-          </li>
+            onClick={props.onSelect.bind(null, el)}>{el}</li>
         )
       })}
     </ul>
   )
 }
-
 SelectLanguageNav.propTypes = {
   selectedLang: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired
 }
-
 function RepoGrid (props) {
   return (
     <ul className='popular-list'>
@@ -33,16 +28,8 @@ function RepoGrid (props) {
           <li key={repo.name} className='popular-item'>
             <div className="popular-rank"># {index + 1}</div>
             <ul className='space-list-items'>
-              <li>
-                <img
-                  className='avatar'
-                  src={repo.owner.avatar_url}
-                  alt={`Avatar for ${repo.owner.login}`}
-                />
-              </li>
-              <li>
-                <a href={repo.html_url}>{repo.name}</a>
-              </li>
+              <li><img className='avatar' src={repo.owner.avatar_url} alt={`Avatar for ${repo.owner.login}`} /></li>
+              <li><a href={repo.html_url}>{repo.name}</a></li>
               <li>@{repo.owner.login}</li>
               <li>{repo.stargazers_count} stars</li>
             </ul>
@@ -51,7 +38,6 @@ function RepoGrid (props) {
     </ul>
   )
 }
-
 RepoGrid.propTypes = {
   repos: PropTypes.array.isRequired
 }
@@ -64,24 +50,14 @@ class Popular extends React.Component {
     }
     this.handleLanguageUpdate = this.handleLanguageUpdate.bind(this);
   }
-
   componentDidMount() {
     this.handleLanguageUpdate(this.state.selectedLang)
   }
-
   handleLanguageUpdate (lang) {
-    this.setState({
-      selectedLang: lang,
-      repos: null
-    })
+    this.setState({ selectedLang: lang, repos: null })
     api.fetchPopularRepos(lang)
-      .then(repos => {
-        this.setState({
-          repos: repos
-        })
-      })
+      .then(repos => { this.setState({ repos: repos }) })
   }
-
   render() {
     const selected = this.state.selectedLang
     return (
@@ -90,17 +66,10 @@ class Popular extends React.Component {
           selectedLang={selected}
           onSelect={this.handleLanguageUpdate}
         />
-        {!this.state.repos ?
-          <p>Loading...</p> :
-          <RepoGrid repos={this.state.repos} />
-        }
+        {!this.state.repos ? <p>Loading...</p> : <RepoGrid repos={this.state.repos} />}
       </div>
     )
   }
 }
-
-Popular.propTypes = {
-};
-
 
 module.exports = Popular
