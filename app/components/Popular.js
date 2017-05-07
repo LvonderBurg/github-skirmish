@@ -1,23 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-class SelectLanguageNav extends React.Component {
-  render() {
-    const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python']
-    return (
-      <ul className="languages">
-        {languages.map((el) => {
-          return (
-            <li
-              key={el}
-              className={el === this.props.selectedLang ? "selected" : null}
-              onClick={this.props.updateLanguage.bind(null, el)}>
-              {el}
-            </li>
-          )
-        })}
-      </ul>)
-  }
+function SelectLanguageNav (props) {
+  const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python']
+  return (
+    <ul className="languages">
+      {languages.map((el) => {
+        return (
+          <li
+            key={el}
+            className={el === props.selectedLang ? "selected" : null}
+            onClick={props.updateLanguage.bind(null, el)}>
+            {el}
+          </li>
+        )
+      })}
+    </ul>
+  )
 }
 
 SelectLanguageNav.propTypes = {
