@@ -12,7 +12,7 @@ li {
 
 
 .container {
-  max-width: 200px;
+  min-width: 200px;
   margin: 0 auto;
 }
 
@@ -29,4 +29,29 @@ li {
 
 .languages li.selected {
   color: crimson;
+}
+
+.popular-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.popular-item {
+  margin: 20px;
+  text-align: center;
+}
+
+.space-list-items {
+  margin-bottom: 7px;
+}
+
+.avatar {
+  width: 150px;
+  border-radius: 50%;
+}
+
+.popular-rank {
+  font-size: 20px;
+  margin: 10px;
 }
