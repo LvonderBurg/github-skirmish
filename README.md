@@ -14,7 +14,7 @@ $ npm start
 
 ```bash
 # assumes you have NodeJS installed, of course
-$ npm build
+$ npm run build
 ```
 
 ## Under the hood
