@@ -17,6 +17,15 @@ $ npm start
 $ npm run build
 ```
 
+### Deploy to Firebase
+
+```bash
+# assumes you have NodeJS installed, of course
+$ npm run firebase-init
+# enter credentials
+$ npm run deploy
+```
+
 ## Under the hood
 This app was not created with create-react-app, which is a great starter kit for React btw.
 Instead, it is built from the ground up using the following tooling:
@@ -24,3 +33,4 @@ Instead, it is built from the ground up using the following tooling:
 - **Webpack Dev Server** for running a simple development server with hot module reloading
 - **Webpack** for running transpiling, minifying, and injecting the finished JS bundle into our static html page
 - **Babel** for transpiling ES6 syntax as well as JSX into regular (ES5-)JavaScript
+- **Firebase-tools** for deploying to Firebase
