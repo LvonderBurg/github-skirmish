@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import api from '../utils/api'
+import Loading from './Loading.js'
 
 function SelectLanguageNav (props) {
   const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python']
@@ -66,7 +67,7 @@ class Popular extends React.Component {
           selectedLang={selected}
           onSelect={this.handleLanguageUpdate}
         />
-        {!this.state.repos ? <p>Loading...</p> : <RepoGrid repos={this.state.repos} />}
+        {!this.state.repos ? <Loading text='Loading' /> : <RepoGrid repos={this.state.repos} />}
       </div>
     )
   }
